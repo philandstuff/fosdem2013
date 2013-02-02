@@ -32,3 +32,47 @@
    - define VMs using a single yaml file
    - supports librarian-chef and berkshelf
    - tests VMs concurrently
+** BATS - Bash Automated Testing System
+   - testing using bash, sort of
+** "Smoke" tests
+   - Don't need to test multiple OS versions
+   - How to DRY up common driver configs?
+   - Where to put IP config?
+** logging
+   - test-kitchen creates one log per VM
+** wiring
+   - hardcoding IP address in Vagrantfile?
+   - assigning IP using Chef Server or Puppetmaster?
+   - Presenting: Chef-Workflow
+** Brian's super-cool Systems Management model
+   - Finite State Machine (zookeeper) [wtf?]
+   - orchestration (rake)
+   - discovery (puppetdb/chef server)
+   - provisioning (puppet/chef/cfengine)
+   - machines (test-kitchen)
+   - virt. drivers (vagrant)
+** More awesome ruby libraries
+   - Faraday
+   - Sinatra
+   - Rspec-dns
+   - ruby-dns
+** Summary
+   - You can do a lot of basic integration testing _right now_ with
+     vagrant + rake
+   - concurrent VM task execution important (though controversial)
+   - Need DSL for integration tests
+   - Test-Kitchen alpha but exciting
+   - There is gold in Chef-Workflow
+   - We need public CI for chef cookbooks etc
+** zookeeper
+   - useful for maintaining dynamic state
+   - master/slave
+   - group membership
+   - when I add an appserver, I don't want to wait for the next puppet
+     run to have it added to the lb pool
+     - zookeeper "basically" a key-value store with events and notifications
+     - load balancer can listen for new appservers
+** TODO Aside: Brians emacs for ruby:
+   - Paredit?!
+   - RBlock?
+   - Ruby mode
