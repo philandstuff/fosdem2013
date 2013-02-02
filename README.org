@@ -1,17 +1,25 @@
 #+TITLE FOSDEM 2013
 
-* Nathan
+* Nathan Harvey, Learning to Automate
+** evolving towards automation:
+   - just make it work
+   - then write notes and store in server.txt
+   - then publish those notes in wiki
+   - then convert notes to scripts
+   - then put scripts into source control
+     - and not the =.bak= or =.<date>= kind
 * Brian Berry, Using Ruby testing frameworks for sanity
 ** standard shape:
-*** appservers, loadbalancers, database nodes, database caches
+   - appservers, loadbalancers, database nodes, database caches
 ** big data deathstar is coming
-*** hadoop, zookeeper, apache mesos
+   - hadoop, zookeeper, apache mesos
 ** testing; two kinds
-*** white box
-*** black box
+   - white box
+   - black box
 ** you should use ruby
-*** lightweight
-*** libraries
-*** rspec
-*** easy to mock services (sinatra) (what does this mean?)
-*** vagrant!
+   - lightweight
+   - libraries
+   - rspec
+   - easy to mock services (sinatra) (what does this mean?)
+   - vagrant!
+** minitest chef handler
