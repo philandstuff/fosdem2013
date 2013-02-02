@@ -23,3 +23,12 @@
    - easy to mock services (sinatra) (what does this mean?)
    - vagrant!
 ** minitest chef handler
+** test kitchen
+** Jamie CI aka Test-Kitchen 1.0
+   - simple job:
+     - define machines
+     - provide virtualization backend
+       - eg vagrant
+   - define VMs using a single yaml file
+   - supports librarian-chef and berkshelf
+   - tests VMs concurrently
