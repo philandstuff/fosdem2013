@@ -8,7 +8,56 @@
    - then convert notes to scripts
    - then put scripts into source control
      - and not the =.bak= or =.<date>= kind
+** new experiences when automating:
+   - new terminology
+   - new programming languages
+   - new way of thinking about infrastructure
+     - livestock, not pets
+** challenges for educators
+   - snowflakes -- everyone's infrastructure is different and under
+     different constraints
+   - deployment variation
+     - loads and loads of options here
+     - OS packages
+     - .jars and .wars
+     - capistrano
+     - not to mention options for injecting environment-specific config
+   - massively varying background of practitioners
+     - sysadmins vs devs, broadly
+     - but variation within and outside of these categories
+   - rate of innovation of field
+** Three archetypal learners
+   - senior sysadmin
+     - understands:
+       - domain
+       - tooling
+     - doesn't understand
+       - high-level abstraction
+       - testing and TDD
+     - needs examples and peer-based learning
+   - "Trust fund" kid
+     - has inherited an existing chef/puppet/cfengine codebase but
+       doesn't understand it
+     - value of automation lowered by lack of understanding
+     - needs mentoring
+   - the dev migrating to operations
+     - understands:
+       - abstraction
+       - testing
+     - doesn't understand:
+       - OS-level concepts and techniques
+     - willing to dig into ruby source code to understand things
+     - needs domain expertise
+   - Pattern here: massive variation in:
+     - motivation
+     - existing skills
+** How can we help?
+   - Community
+     - conferences, usergroups, etc
+   - support and mentoring for those around you
+** finally: if you're using vagrant, use veewee!
 * Brian Berry, Using Ruby testing frameworks for sanity
+  - code at https://github.com/bryanwb/tk-demo
 ** standard shape:
    - appservers, loadbalancers, database nodes, database caches
 ** big data deathstar is coming
@@ -76,3 +125,13 @@
    - Paredit?!
    - RBlock?
    - Ruby mode
+* Pat Debois, spontaneous veewee talk
+** vagrant
+   - creates and destroys VMs very quickly
+   - all starts from a base box
+** veewee
+   - https://github.com/jedi4ever/veewee
+   - takes pain out of building vagrant boxes
+     - also KVM, vmware
+   - interact with those vms (up/destroy/halt/ssh)
+   - export them: OVA for fusion, IMG for KVM, ovf for virtualbox
