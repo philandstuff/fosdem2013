@@ -409,3 +409,12 @@
       - partial learning (based on IP, url, cookie, whatever)
       - partial disable
 *** Reporting etc
+*** Q&A
+    - are you trying to port it to apache?
+      - NO
+    - will it work with nginx used as a proxy?
+      - yes, that's how we mainly use it (with nginx as a reverse proxy)
+    - graphing tools - are they part of naxsi?
+      - yes it comes with all of the reporting tools
+    - can you use it for shared hosting?
+      - use it in learning mode, then make it more of an IDS
