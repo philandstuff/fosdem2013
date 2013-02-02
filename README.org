@@ -2,12 +2,12 @@
 
 * Nathan Harvey, Learning to Automate
 ** evolving towards automation:
-   - just make it work
-   - then write notes and store in server.txt
-   - then publish those notes in wiki
-   - then convert notes to scripts
-   - then put scripts into source control
-     - and not the =.bak= or =.<date>= kind
+   1. just make it work
+   2. then write notes and store in server.txt
+   3. then publish those notes in wiki
+   4. then convert notes to scripts
+   5. then put scripts into source control
+      - and not the =.bak= or =.<date>= kind
 ** new experiences when automating:
    - new terminology
    - new programming languages
@@ -135,3 +135,97 @@
      - also KVM, vmware
    - interact with those vms (up/destroy/halt/ssh)
    - export them: OVA for fusion, IMG for KVM, ovf for virtualbox
+* Maciej Pasternacki, A Continuous Packaging Pipeline
+  - @mpasternacki
+  - http://bit.ly/cont-pkg < talk notes
+** Web infrastructure problems
+   - nginx is too old
+   - I need node.js
+     - compiling on the server is /wrong/
+   - I need foo.jar on all appservers
+     - a Java VM would help using it
+** Package all the things!
+   - http://xallthey.com/package.all.the.things
+   - barriers:
+     - debian policy manual
+   - Goals:
+     - 
+       1. git push
+       2. ...
+       3. profit!
+     - single repo for all packages
+     - one directory per package
+     - share package definitions between projects
+     - run various build systems
+** Pipeline
+   - git
+   - vendorificator
+   - buildbot/jenkins
+   - metarake
+   - evoker
+   - fpm
+   - freight
+   - apt-get
+   - ...
+   - profit!
+*** git
+    - this pipeline really, really depends on git
+    - makes heavy use of branching
+*** vendorificator
+    - "vendor everything"
+    - https://github.com/3ofcoins/vendorificator
+    - tool to manage vendoring & keeping your dependencies close to
+      your code
+    - uses git itself - branch per dependency (I think)
+    - include packages original sources in the repo
+*** CI
+*** rake
+*** metarake
+    - https://github.com/3ofcoins/metarake
+    - rake extension which
+      - discovers modules and their build targets
+      - builds modules with unpublished targets
+      - publishes the build targets
+    - used to
+      - find */Rakefile and *.deb targets
+      - build packages not in the apt repo
+      - push up to apt repo
+*** evoker
+    - https://github.com/3ofcoins/evoker
+    - download original sources at build time
+    - cache them to prevent redownloads
+    - (maven/ivy?)
+    - Download, patch, preprocess upstream sources without keeping
+      them in the repository. Can also cache to avoid repeated long downloads.
+      - (what does preprocess mean?)
+    - seemingly wholly undocumented :(
+*** fpm
+    - https://github.com/jordansissel/fpm
+    - just use it
+    - makes it easy to create
+      - deb, rpm, solaris, tar, directory
+    - from
+      - gem, pypi, pear (php), npm (node), rpm, deb, directory
+*** freight
+    - "a modern take on the debian archive"
+    - https://github.com/rcrowley/freight
+    - reprepro
+      - once set up, it's nice
+      - but it takes a lot of setting up
+    - freight solves these problems
+*** apt-get
+** Questions
+   - what approach do you take to versioning? is it automatic?
+     - right now, just manual
+   - why debian package manager?
+     - I work with debian and ubuntu, putting rpm on those wouldn't
+       make sense
+   - why modify existing packages, when you are using chef? (ie
+     install package, then use chef to customize post-install) 
+     - I don't want server to start then be configured
+     - if I want to run nginx/apache on a different ports, I can't
+       without temporary side-effects
+       - both start on port 80 as soon as installed
+       - [audience] but you can disable the initial start, there's an
+         debian policy
+       - [audience] think you can also use upstart to disable this behaviour
