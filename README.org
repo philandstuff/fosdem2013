@@ -1,4 +1,4 @@
-#+TITLE FOSDEM 2013
+#+TITLE:FOSDEM 2013
 
 * Nathan Harvey, Learning to Automate
 ** evolving towards automation:
@@ -229,3 +229,97 @@
        - [audience] but you can disable the initial start, there's an
          debian policy
        - [audience] think you can also use upstart to disable this behaviour
+   - do you do any package signing?
+     - freight does this automatically
+       - [awesome!]
+* Steve O'Grady - What can Java learn from JavaScript?
+** A brief history of the past two years
+   - FOSDEM '11, "The Rise and Fall and Rise of Java"
+     - Rise
+       - set top boxes
+     - Fall
+       - competition
+       - late in going open source
+       - stagnation/plateau
+     - Rise
+       - regrowth?
+   - FOSDEM '12, "Java in the Age of the JVM"
+     - growth of Java.next
+       1. overstated
+       2. great for Java (the language and the platform)
+   - FOSDEM '13?
+     - popularity chart, http://redmonk.com/sogrady/2012/09/12/language-rankings-9-12/
+       - stack overflow rank / github rank
+         - amused to see SuperCollider and Pure Data languages listed :)
+       - correlation has been rising over time
+         - 0.79 in 2009
+         - 0.83 today
+       - salient point: java is right up there
+     - why are we interested in JavaScript?
+       - compared to java
+         - lower in search rankings
+         - lower in job rankings
+       - BUT
+         - ohloh rankings for contributions & contributors
+           - JS is approaching java
+         - ohloh rankings for number of projects:
+           - JS has overtaken java here
+       - JS is getting substantially more popular
+     - why is JS growing?
+       - besides the obvious
+       - easy wins
+       - JSON
+         - eg used by mongo
+       - analogy: AWS has changed expectations for provisioning speeds
+       - Postgres wasn't in a number of linux distros
+       - mysql was in every single one
+         - easy choice really, even if you prefer postgres
+         - relevant to Java
+           - how do we get the correct licence so that it can be
+             included in a variety of linux distrubutions
+     - frameworks matter
+       - redmonk top 5
+         1. JS (Node.js)
+         2. Java
+         3. PHP
+         4. Python (Django)
+         5. Ruby (Rails)
+       - Java has curse of choice
+         - (Really? Isn't it just Spring or Play? Sure there are
+           other players, but there are other players in Ruby world
+           too. not massively convinced by this line of reasoning)
+         - (His slides listed Noir and Compojure as "java" web frameworks...)
+         - 67 java web frameworks on java-source.net
+           - many are probably dead projects though
+           - what would the equivalent Ruby comparison show?
+     - frameworks are evolving
+       - embracing asynchronicity
+       - node.js
+     - going small with microframeworks
+       - eg spark for java
+* Shane Kerr, BIND10: DNS by cooperating processes
+  - BIND 9
+    - possibly 80% of DNS servers worldwide
+      - (not 80% of queries, or 80% of zones...)
+  - BIND 10 is next version
+    - Complete redesign, many radical changes
+  - ISC
+    - Company behind BIND
+** History of BIND architecture
+   - BIND 8 (May 1997)
+     - Monolithic, single-core
+     - old-school internet software quality
+   - BIND 9 (September 2000)
+     - Complete rewrite
+     - Monolithic, optional threads
+     - Design-by-contract software engineering
+     - Solid by standards of day
+     - Problems
+       - Safe... but brittle
+         - Constant consistency checks in code
+           - =if (validation_failed) { exit(1); }=
+       - "Shared Fate"
+         - Modern DNS servers do a lot of stuff
+         - on errors, lose all functionality
+       - Scalability problems
+         - performance flatlines after 4-6 cores
