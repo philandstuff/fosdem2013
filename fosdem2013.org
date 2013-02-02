@@ -1,0 +1,17 @@
+#+TITLE FOSDEM 2013
+
+* Nathan
+* Brian Berry, Using Ruby testing frameworks for sanity
+** standard shape:
+*** appservers, loadbalancers, database nodes, database caches
+** big data deathstar is coming
+*** hadoop, zookeeper, apache mesos
+** testing; two kinds
+*** white box
+*** black box
+** you should use ruby
+*** lightweight
+*** libraries
+*** rspec
+*** easy to mock services (sinatra) (what does this mean?)
+*** vagrant!
