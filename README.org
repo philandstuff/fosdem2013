@@ -368,3 +368,44 @@
     - 1.0.0 RC1 out 2013-02-14
     - 1.0.0 hopefully out by 2013-02-28
     - http://bind10.isc.org
+* Thibault Koechlin, Naxsi
+** Web Application Firewalls
+*** Limits of black-list approach
+     - variety of technologies
+     - Variety of attacks
+     - increasing versatility of underlying languages
+     - black-list approach is a continuous race
+       - (Had already been lost by anti-virus)
+*** Positive model
+    - closer to the network firewall approach than the anti-virus approach
+    - Relies on a very small (~30) set of "core" rules, generally only
+      one character at a time
+      - simple/double quotes, brackets ...
+    - pros
+      - very fast
+      - resilient to unknown/obfus attacks
+      - lack of updates should not lower protections
+      - simple rules syntax
+    - cons
+      - higher false positive rate
+      - requires whitelist configuration
+*** Rules syntax
+=MainRule "str:<" "msg:open tag" "mz:ARGS|URL|BODY|$HEADERS_VAR:Cookie" "s:$XSS:8" id:1302;=
+    - One pattern (string or regex)
+    - Match zones (where to look for pattern)
+    - Score
+    - ID (for whitelisting & reporting)
+    - As for a real firewall, naxsi rules/whitelists should be as tight as possible:
+      - $URL:/foobar|$BODY_VAR:message
+    - You are as well able to "factorize" whitelists:
+      - $HEADERS_VAR:Cookie
+*** Making it as painless as possible
+    - User is assisted by python tools
+      - whitelist generation from logs or "live" traffic (what do
+        these scare quotes mean?)
+    - naxsi models makes whitelist reutilization easy (ie whitelists
+      set for wordpress)
+    - naxsi hugely benefits from nginx/lua/... capabilities:
+      - partial learning (based on IP, url, cookie, whatever)
+      - partial disable
+*** Reporting etc
