@@ -323,3 +323,48 @@
          - on errors, lose all functionality
        - Scalability problems
          - performance flatlines after 4-6 cores
+** enter BIND 10
+*** Model: Cooperating processes
+     - Inspired by Postfix
+     - Feels like Erlang too
+     - each process does 1 or 2 tasks
+     - Service by cooperating processes
+       - Answering authoritative DNS queries
+       - Transfer DNS zones in/out
+       - DHCPv{4,6}
+       - etc
+     - Only needed processes actually run
+*** Process management
+     - init process bootstraps
+       - message-passing daemon
+       - config daemon
+       - configured services start
+     - if a process dies, it is restarted
+       - back-off algorithm to prevent looping
+     - on shutdown, everything cleaned up
+*** IPC
+     - custom message bus
+       - nothing met requirements (licence, languages, simplicity,
+         works on C++ and python, ...)
+       - built on unix-domain sockets
+     - security
+       - gateway process for administrator auth
+       - internally no restrictions
+     - separate system to pass open files around
+       - needed for zone transfer hand-off
+       - also used for privileged socket creation
+*** Downsides
+     - Complexity
+       - complexity at global level
+       - hidden (mostly) at lower levels)
+       - hidden (partly) from administrators
+     - performance overhead
+       - existing message bus not very fast
+       - no limitations in fast code paths
+     - "Weird" for administrators
+       - a suspicious, conservative profession ;)
+       - look forward to the rants on /. :)
+*** status
+    - 1.0.0 RC1 out 2013-02-14
+    - 1.0.0 hopefully out by 2013-02-28
+    - http://bind10.isc.org
