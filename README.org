@@ -474,4 +474,87 @@ later"; much was filled in afterwards through researching various keywords.
       cares about
 * Paul Sandoz, OpenJDK Lambda the Ultimate
   - http://earthly-powers.blogspot.co.uk/
+  - Why OpenJDK lambda?
+    - About bloody time!
+    - "Excessive use of Guava's functional programming idioms can lead
+      to verbose, confusing, unreadable, and inefficient code. These are
+      by far the most easily (and most commonly) abused parts of Guava,
+      and when you go to preposterous lengths to make your code "a
+      one-liner," the Guava team weeps."
+      - from http://code.google.com/p/guava-libraries/wiki/FunctionalExplained
+    - Allow programming patterns that require modeling code as data to be
+      convenient and idiomatic in Java
+    - lift the level of abstraction in libraries when manipulating data
+      - sequential and parallel programming
+  - Can download builds of OpenJDK lambda now, and give them feedback
+  - Modifying the language
+    - =(String s) -> s.toLowerCase()=
+      - untyped! without context, doesn't make sense
+    - Targeting to functional interface type:
+      - =Function<String,String> f = (String s) -> s.toLowerCase();=
+    - Improved inference
+      - =Function<String,String> f = s -> s.toLowerCase();=
+    - Method references
+      - =Function<String,String> f = String::toLowerCase;=
+  - Interface evolution of default methods
+  - Common functional interfaces =java.util.function=
+  - Bulk operations on collections
+  - Explicit but unobtrusive parallelism
+    - bleah, parallel collections :/
+  - Big picture: Java is changing at all levels
+    - libraries: fork/join
+    - language & compiler: type inference engine
+    - VM: invokedynamic
+  - Talk recommendation:
+    - Guy Steele, How to think about parallel programming: Not!
+      - infoQ link
+  - Demo
+    - lambdas don't create classes... how?
+    - invokedynamic calls for lambda expressions
+    - LambdaMetaFactory
+      http://download.java.net/jdk8/docs/api/java/lang/invoke/LambdaMetafactory.html
+    - Particularly impressed with the method handles
+      - =Callable<Properties> = System::getProperties;=
+      - =IntFunction<String[]> newStringArray = String[]new;= arrays too!
+  - Streams API
+    - fluent interface
+      - ref, int, long, double variants
+    - raises abstraction for parallel operations on data
+      - conceptual and syntactic gap between sequential and parallel reduced
+      - inverts control of data traversal
+    - integrated into existing collection framework
+      - using default methods
+    - lazy evaluation
+      - with a =.collect()= to finally force evaluation
+    - two ways to go parallel
+      - divide and conquer; merge intermediate results
+        - =toArray()= has an optimization:
+          - if output array size == input array size, don't bother
+            with the divide and recombine
+      - concurrently stuff things into a concurrent data structure
+      - Demo: comparison of parallel foreach and parallel collect
+        - foreach put things into synchronized list
+          - ordering not guaranteed
+        - collect joins lists together at end
+          - ordering guaranteed
+    - not entirely free lunch (shock horror)
+      - identity and associativity are important to give library
+        optimization capability
+    - new traversable data structure
+      - a parallel analogue to Iterator
+      - =java.util.Spliterable=
+  - cheeky microbenchmarking
+    - looks faster
+    - health warning
+    - http://code.google.com/p/caliper/
+  - Demo based on @cgrand's clojure game of life example
+  - CountedCompleter
+    - http://gee.cs.oswego.edu/dl/jsr166/dist/docs/java/util/concurrent/CountedCompleter.html
+* Ben Evens, Martijn Verburg, Adopt OpenJDK. What we've learned, where we're going
+  - The London Java Community guys
+  - A JUG led initiative to improve OpenJDK participation
+  - A programme to help improve OpenJDK workflow
+  - An advocacy programme
+  - OpenJDK code quality is *variable*
+    - some is quite old and "sturdy"
   - 
