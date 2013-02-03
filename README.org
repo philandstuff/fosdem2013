@@ -418,3 +418,60 @@
       - yes it comes with all of the reporting tools
     - can you use it for shared hosting?
       - use it in learning mode, then make it more of an IDS
+* Charles Nutter, Invokedynamic: tales from the trenches
+Warning: I was late for this talk, it was very fast, and most of it
+went over my head. The initial notes were just "things too google
+later"; much was filled in afterwards through researching various keywords.
+  - LambdaForm
+  - MethodHandle and invokedynamic
+    - http://blog.headius.com/2008/09/first-taste-of-invokedynamic.html
+      - problem: want to invoke methods without having a method
+        signature statically defined in bytecode (which
+        invokevirtual requires..?)
+      - traditional solution: a Method object from java reflection api
+        - one problem: reflected invocation is sloooow
+          - runtime checks
+          - boxing primitives into Objects, boxing args into arrays
+      - old JRuby way: create an invoker class for each core class method
+        - eg for String#split, we create a class with a shim method
+          with bytecode which:
+          - casts to RubyString
+          - calls invokevirtual on RubyString/split
+        - feels quite wasteful to have hundreds of these classes
+        - worse: it's going into PermGen space, which is at a premium
+      - AnonymousClassLoader: garbage-collectible classes
+        - To make these mini-classes GCable, they need to have their
+          own ClassLoader
+        - Generated classes can share structure with existing classes
+          rather than creating everything anew
+          - "like class X but with different constant pool"
+          - meaning we can generate shim bytecode *once* and repurpose
+            it for different ruby methods
+        - but: doesn't fix boxing issue; either you have one method
+          =Object call(Object[] args);= and pay the boxing penalty, or
+          you have an explosion of method signatures, one for each
+          number of arguments (and an even bigger combinatorial
+          explosion if you also want to avoid boxing primitives)
+          - cf
+            https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/IFn.java
+      - MethodHandle: primitive reference to a method
+        - created either:
+          - from reflection Method object
+          - from MethodHandles factory
+        - adaptation operations:
+          - currying: MethodHandle + arg1 => MethodHandle
+            - cf currying in Haskell/ML/etc
+      - InvokeDynamic
+        - opcode to invoke calls dynamically
+          - but still want JVM to optimize callsite in the same way
+        - 
+  - https://github.com/headius/invokebinder
+  - RubyFlux, a ruby to java complier
+    - https://github.com/headius/rubyflux
+    - basic principle: create one giant interface RObject which has
+      every single method defined in the program
+    - each object implements RObject and only defines the methods it
+      cares about
+* Paul Sandoz, OpenJDK Lambda the Ultimate
+  - http://earthly-powers.blogspot.co.uk/
+  - 
