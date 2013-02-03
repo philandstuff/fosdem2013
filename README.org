@@ -552,9 +552,84 @@ later"; much was filled in afterwards through researching various keywords.
     - http://gee.cs.oswego.edu/dl/jsr166/dist/docs/java/util/concurrent/CountedCompleter.html
 * Ben Evens, Martijn Verburg, Adopt OpenJDK. What we've learned, where we're going
   - The London Java Community guys
-  - A JUG led initiative to improve OpenJDK participation
-  - A programme to help improve OpenJDK workflow
-  - An advocacy programme
+  - Adopt OpenJDK is...
+    - A JUG led initiative to improve OpenJDK participation
+    - A programme to help improve OpenJDK workflow
+    - An advocacy programme
+    - A feeder programme of ideas and talent
+    - A mentoring and educational incubator
+    - A place to prorotype new social/community workflow ideas
+    - Early feedback mechanism
+    - An area to try some small technical ideas
+    - An area to work with casual as well as full-time participants
+    - Ideas and tech will shift to the OpenJDK on *merit*
+      - usual OpenJDK rules apply
+    - example: worked with Tom Christiansen (of Perl fame) to help him
+      get some Unicode regex fixes in that he'd been sitting on
+      - but his lack of familiarity with codebase/community/process
+        whatever might otherwise have prevented this
   - OpenJDK code quality is *variable*
     - some is quite old and "sturdy"
-  - 
+  - Huge developer demand to get involved
+    - OpenJDK hack days sell out in hours
+    - ~10 hack days in 2012
+    - In 2-3 hours, 20-30 developers can get started on OpenJDK
+      - This propagates
+  - Developers are scared of OpenJDK
+    - They think only Rocket Scientists need apply
+      - Charles Nutter doesn't help with his invokedynamic talks ;)
+      - They think you need advanced C/C++/Assembler skills
+    - They are scared to make public contributions
+    - They are scared they will break something
+  - Devs are surprised at the helpfulness
+    - OpenJDK has somewhat of a surly reputation
+      - main contributors are very busy
+    - Most OpenJDK projects have a very welcoming attitude
+  - Devs can't build OpenJDK easily
+    - Even with =build-infra= it's a barrier to entry
+    - Lack of IDE support - no IntelliJ, Eclipse, NetBeans
+      - got to use emacs or vi or whatever
+    - =make= is an unfamiliar build tool for many
+    - Developers guide is out of date
+    - even with =jtreg= improvements - it's a barrier to entry
+      - TestNG support is very welcome
+    - Lack of access to complete (open) tests
+      - one issue here is that some tests may be based on customer
+        data -- can't be released without anonymizing first
+    - Lack of alternative test platforms
+    - Lack of CI
+  - Developers want to code socially
+    - They are used to
+      - Github etc
+      - collaborative coe review
+      - to open issue trackers
+      - to UI/UX which leads them to information
+      - ideas/designs being discussed more fully
+        - JEP system while seemingly fair is causing frustration
+          - "casual" contributors don't get same voice
+          - difficult in tchrist example above
+      - consistent technical standards
+        - OpenJDK projects each have their own
+  - Developers struggle to submit code
+    - Many branches/forests/trees confuse them
+      - so many projects, which one is the one I want to commit to?
+    - =webrev= is a major hurdle
+      - patch turnaround times are slow for external contributors
+  - Developers love the idea of OpenJDK
+    - we're promoting the hell out of it
+    - 4 dedicated LJC advocates
+    - Brazil-wide programme launched by SouJava
+  - Hackdays are the best way to educate
+    - 20+ hackdays planned globally in 2013
+    - All major conferences to hold them
+      - arranged via the JUG leaders and Java Champions programme
+    - Hackday materials to be shared on GitHub
+    - LJC advocates working on Chef/vagrant builds
+      - We love Devops people :)
+  - Testing!
+    - Testfest planned with IBM and Oracle et al
+      - TestNG tests to be written
+    - Agreement to open up tests
+      - Oracle, IBM, RedHat, Azul et al
+    - Initial discussions around a secure distributed build farm
+      - cloudbees willing to donate compute time/space
