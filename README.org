@@ -461,10 +461,17 @@ later"; much was filled in afterwards through researching various keywords.
         - adaptation operations:
           - currying: MethodHandle + arg1 => MethodHandle
             - cf currying in Haskell/ML/etc
-      - InvokeDynamic
+      - InvokeDynamic, JSR-292
         - opcode to invoke calls dynamically
           - but still want JVM to optimize callsite in the same way
-        - 
+        - causes Hotspot to treat invokeinterface calls on a special
+          "Dynamic" class as "special"
+        - use Linkage.registerBootstrapMethod to register a
+          "bootstrap method" which determines which method will be
+          called at this callsite
+          - will be saved and used on subsequent calls, so bootstrap
+            method doesn't get re-evaluated
+        - Note this is as at 2008. Not final implementation
   - https://github.com/headius/invokebinder
   - RubyFlux, a ruby to java complier
     - https://github.com/headius/rubyflux
@@ -633,3 +640,18 @@ later"; much was filled in afterwards through researching various keywords.
       - Oracle, IBM, RedHat, Azul et al
     - Initial discussions around a secure distributed build farm
       - cloudbees willing to donate compute time/space
+* Heather VanCura and Martijn Verburg, Java Community Process, state of the community
+  - JCP is 14 years old
+    - 350 JSRs submitted over the years
+      - Java Specification Request
+    - currently 29 active JSRs
+  - 80+ different members have led JSRs
+  - eg JSR335 Lambda Expressions
+  -
+* spontaneous graph processing talk
+  - Introduction to graphs
+  - Implementation strategies
+    - RDF seems promising: triple corresponds to Vertex->Edge->Vertex
+    - BUT what about things changing over time? (Example: Gerhard
+      Schröder and his 6 wives)
+    - Time
