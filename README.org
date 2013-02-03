@@ -655,7 +655,7 @@ later"; much was filled in afterwards through researching various keywords.
     - BUT what about things changing over time? (Example: Gerhard
       Schröder and his 6 wives)
     - Time
-* Leslie Hawthorn, Jazzsperiments
+* Teun de Lange, Jazzsperiments
   - Talk blurb: https://fosdem.org/2013/schedule/event/jazzperiments/
   - looks like it was recorded
   - experiment
