@@ -655,3 +655,28 @@ later"; much was filled in afterwards through researching various keywords.
     - BUT what about things changing over time? (Example: Gerhard
       Schröder and his 6 wives)
     - Time
+* Leslie Hawthorn, Jazzsperiments
+  - Talk blurb: https://fosdem.org/2013/schedule/event/jazzperiments/
+  - looks like it was recorded
+  - experiment
+    - clarinet -> microphone -> processing -> bassline
+    - bass on a bit of a delay
+    - but lots of intelligence too
+    - Java Sound Engine
+  - problems
+    - processing latency causes noticable delay
+    - solution: use metronome and delay by fixed number of beats
+      - plays in sync, but a bit late
+  - other ideas
+    - sampling and playback
+  - some impressive visualizations
+    - live creation of musical score
+    - John cage style notation
+  - Q&A
+    - what do you do about java GC?
+      - minimize object churn, etc
+    - have you done experiments with predictive algorithms
+      - 
+    - have you done anything with progressions?
+      - I've got a way to tell it the key, and to change chord after 4
+        bars. you have to get used to it though.
