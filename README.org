@@ -680,3 +680,38 @@ later"; much was filled in afterwards through researching various keywords.
     - have you done anything with progressions?
       - I've got a way to tell it the key, and to change chord after 4
         bars. you have to get used to it though.
+* Leslie Hawthorn, the keeper of secrets
+  - example: contributor on critical path going through tough time
+    - less able to contribute than before
+    - doesn't want to talk about why
+    - others see it as deliberate discourtesy
+    - resolution: try to encourage disclosure
+      - (really? some things are truly private)
+      - (perhaps disclose that *something* is wrong without disclosing *what*?)
+  - example: person who doesn't get it
+    - cheerleader
+    - advocate
+    - their actions harm the flow of the project
+    - other people get cranky if they're spending time herding errant
+      fellow volunteers
+      - they'll complain to each other, but won't take their concerns
+        directly to the problem individual
+  - handling these situations quickly and effectively is messy,
+    uncomfortable and incredibly necessary
+  - Techniques
+    - try to direct people towards their strengths
+      - eg get the person who "doesn't get it" to do marketing rather
+        than technical work
+    - model: conversations depend on two dimensions
+      1. strength of relationship
+      2. alignment of interests
+    - talking with people we like and agree with is easy
+    - everything else feels like it's going to be really painful
+      - ie good relationship, but poor alignment of interests, or vice versa
+    - be willing to ask for what you want
+    - ask the other party what they need
+    - find common ground
+    - reach agreement
+    - this means "Radical honesty" (!= being a tactless jerk)
+    - being diplomatic != being disingenuous
+    - do you want to be right or do you want to win?
