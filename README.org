@@ -1,6 +1,7 @@
 #+TITLE:FOSDEM 2013
 
 * Nathan Harvey, Learning to Automate
+https://speakerdeck.com/nathenharvey/learning-to-automate
 ** evolving towards automation:
    1. just make it work
    2. then write notes and store in server.txt
@@ -57,6 +58,7 @@
    - support and mentoring for those around you
 ** finally: if you're using vagrant, use veewee!
 * Brian Berry, Using Ruby testing frameworks for sanity
+  - slides at https://speakerdeck.com/bryanwb/dont-shrug-integration-testing-for-infrastructure-with-ruby-frameworks
   - code at https://github.com/bryanwb/tk-demo
 ** standard shape:
    - appservers, loadbalancers, database nodes, database caches
@@ -137,6 +139,7 @@
    - export them: OVA for fusion, IMG for KVM, ovf for virtualbox
 * Maciej Pasternacki, A Continuous Packaging Pipeline
   - @mpasternacki
+  - https://speakerdeck.com/mpasternacki/a-continuous-packaging-pipeline
   - http://bit.ly/cont-pkg < talk notes
 ** Web infrastructure problems
    - nginx is too old
@@ -715,3 +718,67 @@ later"; much was filled in afterwards through researching various keywords.
     - this means "Radical honesty" (!= being a tactless jerk)
     - being diplomatic != being disingenuous
     - do you want to be right or do you want to win?
+* Notes from conversation with Eric Sorenson and Nathen Harvey
+  - testing configuration
+    - you can't get absolute certainty about your catalog without
+      running it on a real server
+    - but you want to avoid testing puppet and focus on testing your
+      actual code
+      - cf ruby projects which end up testing ActiveSupport
+    - In sw dev community, this is (largely) a solved issue. Key points:
+      - push exhaustive testing down to unit level
+      - layering of integration tests; integrate only as much of the
+        system as you need to run your tests
+        - in-process testing is the hot new thing here -- don't create
+          a webserver to serve your site, just call the toplevel
+          methods to simulate web requests
+          - specifications such as servlets, rack, wsgi *really* help
+            with this
+        - inproctester is a tool for this
+      - use as little testing as possible with your whole app on the
+        full stack; ideally just one test that checks everything is
+        connected together
+      - Must always keep in mind the tradeoff between time test takes
+        and value it provides
+      - http://dan.bodar.com/2012/02/28/crazy-fast-build-times-or-when-10-seconds-starts-to-make-you-nervous/
+  - testing puppet specifically
+    - rspec-puppet a little rough round the edges for a unit testing framework
+      - when you instantiate something, you instantiate the whole
+        graph below it
+        - example where adding 2 tests increased test time by ~15 seconds
+        - this is painful for unit tests
+      - dependency testing is tied to implementation
+        - if you test for presence of a =require => Package[foo]= on =File[bar]=, you
+          won't see =package {'foo': before => File[bar]}=
+        - worse, there seems to be *no way* to test for dependencies
+          of the form =Package[foo] -> File[bar]=
+        - https://github.com/rodjek/rspec-puppet/issues/31
+  - If I wanted to write a new frontend language for puppet, where
+    would I "cut in"?
+    - Generate a catalog; it's the type that goes over the wire to the
+      agent.
+    - puppetlabs themselves have no plans to do this; however they are
+      interested in introducing middleware here
+      - eg a caching proxy, which only recalculates when facts change
+        - one fact is unix time though, which is always changing
+  - facter: the rough edges
+    - =memorysize= is unfriendly for scripting
+      - we had a use case where we wanted varnish to use at most 75%
+        of physical memory
+      - ended up writing a custom fact for this
+    - unix time -- is it needed?
+    - seems to be quite a bit of cruft
+  - How do you folks manage certificate generation and signing?
+    - We use =puppet cert= and let puppet autogenerate the key on
+      first run
+    - We have scripted our provisioner to ssh to the puppetmaster and
+      sign the cert when provisioning a new machine
+  - Chef servers are not compute-bound
+    - delegate most of the computation to the agents
+    - push the cookbooks out
+    - how do you manage secrets? (db passwords etc)
+      - facility for encrypting secrets
+        - if you use chef bootstrap, chef will autogenerate keys for you
+        - all done with TLS
+  - Eric's recent puppetcamp talk on puppet, present and future:
+    http://www.slideshare.net/ahpook1/puppet-3-present-and-future-tense
